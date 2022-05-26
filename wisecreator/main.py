@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
+import sys
 import shutil
 import sqlite3
+#import loggingpwd
 import logging
 import argparse
 import subprocess
-from dataclasses import dataclass
 
 import nltk
+#nltk.data.path.append("/Users/liu/nltk_data")
 import cursor
+from dataclasses import dataclass
 
 from wisecreator import book as ww_book
 from wisecreator.utils import get_path_to_mobitool, get_path_to_data
+
+global wisewords_set
 
 def check_dependencies():
     try:
@@ -274,9 +279,11 @@ class WordWiser:
         return wlog
 
     def process_glosses(self, lldb, wlog, glosses):
+        global wisewords_set
         for gloss in glosses:
             sense = self.word_processor.get_sense(gloss.word)
             if sense:
+                wisewords_set.add(gloss.word.lower())
                 wlog.debug("{} - {} - {}".format(gloss.offset, gloss.word, sense.id))
                 lldb.add_gloss(gloss.offset, sense.difficulty, sense.id)
             yield gloss
@@ -306,6 +313,7 @@ class WordWiser:
 def process(path_to_book, output_path):
     path_to_script = os.path.dirname(os.path.realpath(__file__))
     path_to_nltk_data = os.path.join(path_to_script, "nltk_data")
+#    path_to_nltk_data = '/Users/liu/nltk_data'
     word_processor = WordProcessor(path_to_nltk_data,
                                    WordFilter(get_path_to_data("filter.txt")),
                                    SenseProvider(get_path_to_data("senses.csv")))
@@ -317,7 +325,13 @@ def process(path_to_book, output_path):
 def main():
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument("fi", type=str, metavar="PATH_TO_YOUR_BOOK")
-    args = parser.parse_args()
+    if len(sys.argv)==1:
+        file_args='gatsby.mobi'
+        file_fullname='/Users/liu/pyproject/wisecreator2/testbooks/'+file_args   
+        args = parser.parse_args([file_fullname])
+    else:
+        args = parser.parse_args()
+
 
     print("[.] Checking dependencies")
     try:
@@ -327,8 +341,13 @@ def main():
         print("    |", e)
         return
 
+    global wisewords_set
+    wisewords_set=set()
     process(args.fi, os.path.dirname(args.fi))
 
+    sortedwords=list(wisewords_set)
+    sortedwords.sort()
+    print(sortedwords,len(sortedwords))
 
 if __name__ == "__main__":
     main()

@@ -19,9 +19,9 @@ class PostInstallCommand(install):
 
 setup(
     name='wisecreator',
-    version='1.0.0',
+    version='2.3.0',
     python_requires='>=3.6',
-    author='Timofey Milovanov',
+    author='lamb liu ',
     packages=['wisecreator'],
     package_data={
         'wisecreator':['data/*', 'third_party/*']
@@ -30,7 +30,6 @@ setup(
         'nltk==3.4.5',
         'cursor==1.3.4',
         'six==1.12.0',
-        'dataclasses',
     ],
     setup_requires=[
         'nltk==3.4.5',
