@@ -48,6 +48,9 @@ To enable wordwise, the lang meta data of your .mobi files should be set to `eng
 4.  From this project folder run 
 5.  Finally run wisecreator: `python3 -m wisecreator.main PATH_TO_YOUR_BOOK`
 
+export PATH=$PATH:/Volumes/Macintosh\ HD\ \-\ 数据/Applications/calibre.app/Contents/MacOS
+
+
 ---
 
 ## Kindle Android app

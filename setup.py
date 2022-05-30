@@ -24,15 +24,15 @@ setup(
     author='lamb liu ',
     packages=['wisecreator'],
     package_data={
-        'wisecreator':['data/*', 'third_party/*']
+        'wisecreator':['data/*', 'third_party/*','third_party/*/*','third_party/*/*/*']
     },
     install_requires=[
-        'nltk==3.4.5',
+        'nltk',
         'cursor==1.3.4',
         'six==1.12.0',
     ],
     setup_requires=[
-        'nltk==3.4.5',
+        'nltk',
     ],
     cmdclass={
       'install': PostInstallCommand,

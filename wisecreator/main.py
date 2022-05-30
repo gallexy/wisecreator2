@@ -327,7 +327,7 @@ def main():
     parser.add_argument("fi", type=str, metavar="PATH_TO_YOUR_BOOK")
     if len(sys.argv)==1:
         file_args='gatsby.mobi'
-        file_fullname='/Users/liu/pyproject/wisecreator2/testbooks/'+file_args   
+        file_fullname='/Users/liuxiaohua/pyproject/wisecreator2/testbooks/'+file_args   
         args = parser.parse_args([file_fullname])
     else:
         args = parser.parse_args()
