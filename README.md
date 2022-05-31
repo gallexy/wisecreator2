@@ -33,9 +33,11 @@ To enable wordwise, the lang meta data of your .mobi files should be set to `eng
 3.  this project need nltk, you should be able to download nltk data 
     correctly. If you need to access nltk through proxy, you could set
     proxy at first, like below:
-    >>>import nltk
-    >>>nltk.set_proxy('http://localhost:1087’)
-    >>>nltk.download()
+    ```
+    >>> import nltk
+    >>> nltk.set_proxy('http://localhost:1087’)
+    >>> nltk.download()
+    ```
 
 4.  From this project folder run
 ```
